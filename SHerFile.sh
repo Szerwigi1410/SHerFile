@@ -43,7 +43,7 @@ OUTPUT="temp.txt"
 #--------Main window
 dialog --clear --title "SHerFile" --backtitle "Szerwigi's Bash File manager" --menu "File actions" 15 40 5 \
         1 "List files and folders" \
-        2 "List files UI" \
+        2 "File browser UI" \
         3 "List all files and folders" \
         4 "Custom command" \
         5 "Custom command --hold" \
@@ -65,7 +65,10 @@ case $choice in
                 exit 1
             fi
 
-            menu_items=(".." "[go back]") # "$HOME" "[home]"
+            menu_items=(
+                ".." "[go back]"
+                "$HOME" "[home]"
+            )
             for file in "${files[@]}"; do
                 if [ -d "$file" ]; then
                     menu_items+=("$file" "[folder]")
@@ -76,7 +79,7 @@ case $choice in
 
 
             choice1=$(dialog --clear --backtitle "Szerwigi's Bash File Manager" \
-                --menu "Choose the file or folder to open ($IDE):" 25 52 10 "${menu_items[@]}" \
+                --menu "Choose the file or folder to open ($IDE):" 25 55 10 "${menu_items[@]}" \
                 3>&1 1>&2 2>&3)
 
             exit_status=$?
@@ -85,8 +88,8 @@ case $choice in
             if [ $exit_status -eq 0 ] && [ -n "$choice1" ]; then
                 if [$choice1 = ".." ]; then
                     cd ..
-                #if [$choice1 = "$HOME"]; then
-                #    cd $HOME
+                elif [$choice1 = "$HOME"]; then
+                    cd $HOME
                 elif [ -d "$choice1" ]; then
                     cd "$choice1"
                 else
