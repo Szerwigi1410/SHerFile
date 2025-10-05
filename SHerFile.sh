@@ -4,7 +4,7 @@
 # For now ts only works with kitty
 
 # files in the current folders
-files=(*)
+files=(.* *)
 
 #----COLOR-CODES:
 
@@ -56,27 +56,39 @@ clear
 case $choice in
     1) ls --color=auto
         ;;
-    2)  if [ ${#files[@]} -eq 0 ]; then
-            dialog --msgbox "No files!" 6 40
+    2)
+        while true; do
+            files=(.* *)
+            if [ ${#files[@]} -eq 0 ]; then
+                dialog --msgbox "No files!" 6 40
+                clear
+                exit 1
+            fi
+
+            menu_items=()
+            for file in "${files[@]}"; do
+                menu_items+=("$file" "")
+            done
+
+            choice1=$(dialog --clear --backtitle "Szerwigi's Bash File Manager" \
+                --menu "Choose the file or folder to open ($IDE):" 15 50 10 "${menu_items[@]}" \
+                3>&1 1>&2 2>&3)
+
+            exit_status=$?
             clear
-            exit 1
-        fi
 
-        menu_items=()
-        for file in "${files[@]}"; do
-            menu_items+=("$file" "")
+            if [ $exit_status -eq 0 ] && [ -n "$choice1" ]; then
+                if [ -d "$choice1" ]; then
+                    cd "$choice1"
+                else
+                    $IDE "$choice1"
+                    break
+                fi
+            else
+                echo "Exitting..."
+                break
+            fi
         done
-
-        choice1=$(dialog --clear --backtitle "Szerwigi's Bash File manager" --menu "Choose the file to open ($IDE):" 15 50 10 "${menu_items[@]}" 3>&1 1>&2 2>&3)
-
-        exit_status=$?
-        clear
-
-        if [ $exit_status -eq 0 ] && [ -n "$choice1" ]; then
-            $IDE "$choice1"
-        else
-            echo "Exitting..."
-        fi
         ;;
     3) ls --color=auto -a
         ;;
