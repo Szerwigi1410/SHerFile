@@ -103,14 +103,15 @@ case $choice in
         ;;
     3) ls --color=auto -a
         ;;
-    4) dialog --clear --title "Inputbox" --backtitle "Szerwigi's Bash File manager" --inputbox "Custom command:" 10 40 "" 2> $OUTPUT
+    4)
+       dialog --clear --title "Inputbox" --backtitle "Szerwigi's Bash File manager" --inputbox "Custom command:" 10 40 "" 2> $OUTPUT
        kitty $(<$OUTPUT)
        clear
        ;;
     5) dialog --clear --title "Inputbox" --backtitle "Szerwigi's Bash File manager" --inputbox "Custom command --hold:" 10 40 "" 2> $OUTPUT
        kitty --hold $(<$OUTPUT)
        clear
-       ;;   
+       ;;
     6) echo "Exiting..."
        ;;
     *) echo "Invalid choice"
