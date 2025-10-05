@@ -67,11 +67,16 @@ case $choice in
 
             menu_items=()
             for file in "${files[@]}"; do
-                menu_items+=("$file" "")
+                if [ -d "$file" ]; then
+                    menu_items+=("$file" "[folder]")
+                else
+                    menu_items+=("$file" "[file]")
+                fi
             done
 
+
             choice1=$(dialog --clear --backtitle "Szerwigi's Bash File Manager" \
-                --menu "Choose the file or folder to open ($IDE):" 15 50 10 "${menu_items[@]}" \
+                --menu "Choose the file or folder to open ($IDE):" 25 52 10 "${menu_items[@]}" \
                 3>&1 1>&2 2>&3)
 
             exit_status=$?
