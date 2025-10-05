@@ -65,7 +65,7 @@ case $choice in
                 exit 1
             fi
 
-            menu_items=()
+            menu_items=(".." "[go back]") # "$HOME" "[home]"
             for file in "${files[@]}"; do
                 if [ -d "$file" ]; then
                     menu_items+=("$file" "[folder]")
@@ -83,7 +83,11 @@ case $choice in
             clear
 
             if [ $exit_status -eq 0 ] && [ -n "$choice1" ]; then
-                if [ -d "$choice1" ]; then
+                if [$choice1 = ".." ]; then
+                    cd ..
+                #if [$choice1 = "$HOME"]; then
+                #    cd $HOME
+                elif [ -d "$choice1" ]; then
                     cd "$choice1"
                 else
                     $IDE "$choice1"
