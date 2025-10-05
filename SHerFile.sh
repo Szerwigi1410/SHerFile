@@ -67,7 +67,7 @@ case $choice in
             menu_items+=("$file" "")
         done
 
-        choice1=$(dialog --clear --backtitle "Szerwigi's Bash File manager" --menu "Choose the file to open (nano):" 15 50 10 "${menu_items[@]}" 3>&1 1>&2 2>&3)
+        choice1=$(dialog --clear --backtitle "Szerwigi's Bash File manager" --menu "Choose the file to open ($IDE):" 15 50 10 "${menu_items[@]}" 3>&1 1>&2 2>&3)
 
         exit_status=$?
         clear
