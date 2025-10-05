@@ -91,7 +91,6 @@ case $choice in
                     cd "$choice1"
                 else
                     $IDE "$choice1"
-                    break
                 fi
             else
                 echo "Exitting..."
