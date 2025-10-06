@@ -51,7 +51,8 @@ dialog --clear --title "SHerFile" --backtitle "Szerwigi's Bash File manager" --m
         3 "List all files and folders" \
         4 "Custom command" \
         5 "Custom command --hold" \
-        6 "Exit" 2>menu_choice.txt
+        6 "About" \
+        7 "Exit" 2>menu_choice.txt
 
 choice=$(<menu_choice.txt)
 clear
@@ -116,7 +117,13 @@ case $choice in
        kitty --hold $(<$OUTPUT)
        clear
        ;;
-    6) echo "Exiting..."
+    6) dialog --clear \
+        --title "About SHerFile" \
+        --backtitle "Szerwigi's Bash File manager" \
+        --msgbox "MIT License\n\nCopyright (c) 2025 Szerwigi1410\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE." 20 91
+         clear
+       ;;
+    7) echo "Exiting..."
        ;;
     *) echo "Invalid choice"
        ;;
