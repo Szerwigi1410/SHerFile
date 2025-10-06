@@ -28,13 +28,17 @@ if [[ ! -f "$CONFIG_FILE" ]]; then
     mkdir -p "$(dirname "$CONFIG_FILE")"
     echo -e "# Your IDE or text editor:" > "$CONFIG_FILE"
     echo -e "EDITOR=nano\n" >> "$CONFIG_FILE"
-
+    echo -e "# UI file manager window size" >> "$CONFIG_FILE"
+    echo -e "WIN_HEIGHT=25" >> "$CONFIG_FILE"
+    echo -e "WIN_WIDTH=55\n" >> "$CONFIG_FILE"
 fi
 
 # Load values from the config
 source "$CONFIG_FILE"
 
 IDE="$EDITOR"
+HEIGHT="$WIN_HEIGHT"
+WIDTH="$WIN_WIDTH"
 
 #--------output .txt file
 OUTPUT="temp.txt"
@@ -79,7 +83,7 @@ case $choice in
 
 
             choice1=$(dialog --clear --backtitle "Szerwigi's Bash File Manager" \
-                --menu "Choose the file or folder to open ($IDE):" 25 55 10 "${menu_items[@]}" \
+                --menu "Choose the file or folder to open ($IDE):" $HEIGHT $WIDTH 10 "${menu_items[@]}" \
                 3>&1 1>&2 2>&3)
 
             exit_status=$?
