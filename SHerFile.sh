@@ -117,11 +117,27 @@ case $choice in
        kitty --hold $(<$OUTPUT)
        clear
        ;;
-    6) dialog --clear \
-        --title "About SHerFile" \
-        --backtitle "Szerwigi's Bash File manager" \
-        --msgbox "MIT License\n\nCopyright (c) 2025 Szerwigi1410\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE." 20 91
-         clear
+    6) dialog --clear --title "SHerFile" --backtitle "Szerwigi's Bash File manager" --menu "Choose" 15 40 5 \
+        1 "Info" \
+        2 "MIT License" 2>menu_choice2.txt
+       clear 
+
+       choice2=$(<menu_choice2.txt)
+       
+       case $choice2 in
+        1) dialog --clear \
+                --title "About SHerFile" \
+                --backtitle "Szerwigi's Bash File manager" \
+                --msgbox "SHerFile is a simple file manager written in bash.\nCreated by Szerwigi1410" 15 60
+                clear
+                ;;
+        2)dialog --clear \
+                --title "About SHerFile" \
+                --backtitle "Szerwigi's Bash File manager" \
+                --msgbox "MIT License\n\nCopyright (c) 2025 Szerwigi1410\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE." 20 91
+              clear
+              ;;
+        esac    
        ;;
     7) echo "Exiting..."
        ;;
