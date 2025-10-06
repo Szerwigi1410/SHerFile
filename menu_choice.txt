@@ -1,1 +1,1 @@
-6
+Error opening terminal: unknown.
